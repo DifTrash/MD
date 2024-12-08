@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color> <!-- Latar belakang gelap -->
+    <color name="white">#FFFFFFFF</color> <!-- Warna tempat sampah -->
+    <color name="cyan">#00BCD4</color> <!-- Warna aksen biru -->
+    <color name="light_blue">#E0F7FA</color> <!-- Warna tambahan -->
+    <color name="green">#87B15F</color> <!-- Warna hijau -->
+    <color name="grey">#F5F5F5</color>
+    <color name="orange">#FFC354</color>
+</resources>
