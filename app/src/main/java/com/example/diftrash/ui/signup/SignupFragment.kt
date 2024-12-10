@@ -106,7 +106,7 @@ class SignupFragment : Fragment() {
             }
         }
         binding.txtLogin.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.frm_container_login, SignupFragment()).commit()
+            requireActivity().supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.frm_container_login, InputLoginFragment()).commit()
         }
         return binding.root
     }

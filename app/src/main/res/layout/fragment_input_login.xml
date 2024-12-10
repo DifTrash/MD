@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:text="@string/hello"
         android:textSize="20sp"
+        android:textColor="@color/cyan"
         android:layout_marginTop="0dp"
         android:fontFamily="@font/poppins_bold" />
 
@@ -30,6 +31,7 @@
         android:layout_height="wrap_content"
         android:text="@string/welcome_back"
         android:textSize="20sp"
+        android:textColor="@color/black"
         android:fontFamily="@font/poppins_bold" />
 
 
@@ -45,6 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
+            android:textColor="@color/black"
             android:fontFamily="@font/poppins_regular"
             android:inputType="textEmailAddress"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -62,6 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
+            android:textColor="@color/black"
             android:fontFamily="@font/poppins_regular"
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
