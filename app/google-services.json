@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "674522603128",
+    "project_id": "diftrash-5fe44",
+    "storage_bucket": "diftrash-5fe44.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:674522603128:android:f63fdaaa53a5d77380d78d",
+        "android_client_info": {
+          "package_name": "com.example.diftrash"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwv4oZviB83nBGa9zyBJHBQi38GQ6z_SA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
