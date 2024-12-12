@@ -1,15 +1,21 @@
-package com.example.diftrash.retrofit
+package com.example.diftrash.data.retrofit
 
 import com.google.gson.annotations.SerializedName
 
-data class DyslexiaDataItem(
-	val confidence: Any? = null,
-	val diagnosis: String? = null,
-	val id: String? = null
-)
-
 data class GetResponse(
-	@field:SerializedName("dyslexia_data")
-	val dyslexiaData: List<DyslexiaDataItem?>? = null
+	@field:SerializedName("data")
+	val data: List<DataItem?>? = null,
 )
 
+
+data class DataItem(
+
+	@field:SerializedName("confidence")
+	val confidence: Any? = null,
+
+	@field:SerializedName("id")
+	val id: String? = null,
+
+	@field:SerializedName("type")
+	val type: String? = null
+)

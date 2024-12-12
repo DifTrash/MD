@@ -16,7 +16,7 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultBinding
 
     private lateinit var confidenceTextView: TextView
-    private lateinit var diagnosisTextView: TextView
+    private lateinit var typeTextView: TextView
     private lateinit var photoView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,24 +26,24 @@ class ResultActivity : AppCompatActivity() {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
         confidenceTextView = findViewById(R.id.detail_result)
-        diagnosisTextView = findViewById(R.id.recommendation)
+        typeTextView = findViewById(R.id.recommendation)
 
         val imageUriString = intent.getStringExtra("imageUri")
         val confidence = intent.getDoubleExtra("confidence", 0.0)
-        val diagnosis = intent.getStringExtra("diagnosis") ?: "No diagnosis"
+        val type = intent.getStringExtra("type") ?: "No type"
         photoView = findViewById(R.id.photoView)
 
 
-        showResult(confidence, diagnosis)
+        showResult(confidence, type)
         showImage(imageUriString)
         initializeUI()
 
     }
 
-    private fun showResult(confidence: Double, diagnosis: String) {
+    private fun showResult(confidence: Double, type: String) {
         val formattedConfidence = String.format("%.2f%%", confidence * 100)
         confidenceTextView.text = formattedConfidence
-        diagnosisTextView.text = "$diagnosis"
+        typeTextView.text = "$type"
     }
 
 

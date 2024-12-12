@@ -6,14 +6,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diftrash.R
-import com.example.diftrash.retrofit.DyslexiaDataItem
+import com.example.diftrash.data.retrofit.DataItem
 import com.example.diftrash.ui.history.HistoryFragment
 
 class HistoryAdapter(historyFragment: HistoryFragment) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
-    private var dataList: MutableList<DyslexiaDataItem?> = mutableListOf()
+    private var dataList: MutableList<DataItem?> = mutableListOf()
 
-    fun updateData(newData: List<DyslexiaDataItem?>?) {
+    fun updateData(newData: List<DataItem?>?) {
         newData?.let {
             dataList.addAll(0, it)
             notifyDataSetChanged()
@@ -36,18 +36,18 @@ class HistoryAdapter(historyFragment: HistoryFragment) : RecyclerView.Adapter<Hi
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val confidenceTextView: TextView = itemView.findViewById(R.id.confidenceTextView)
-        private val diagnosisTextView: TextView = itemView.findViewById(R.id.diagnosisTextView)
+        private val typeTextView: TextView = itemView.findViewById(R.id.typeTextView)
 
 
-        fun bind(item: DyslexiaDataItem?) {
+        fun bind(item: DataItem?) {
             item?.let {
                 val confidence = item.confidence as? Double
                 val confidencePercentage = confidence?.times(100)
 
                 val formattedConfidence = String.format("%.2f%%", confidencePercentage)
-                val diagnosis = item.diagnosis
+                val type = item.type
                 confidenceTextView.text = "Result: $formattedConfidence"
-                diagnosisTextView.text = "Diagnosis: $diagnosis"
+                typeTextView.text = "Type: $type"
 
             }
         }

@@ -57,6 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/cyan"
         app:startIconDrawable="@drawable/lock"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -105,15 +106,5 @@
             android:textColor="@color/orange"
             android:layout_marginStart="4dp"/>
     </LinearLayout>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_gravity="center|bottom"
-        tools:layout_editor_absoluteX="142dp"
-        tools:layout_editor_absoluteY="162dp"
-        tools:ignore="MissingConstraints" />
-
 
 </LinearLayout>

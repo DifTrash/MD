@@ -10,12 +10,12 @@ import com.example.diftrash.databinding.FragmentHomeBinding
 import com.example.diftrash.ui.article.ArticleActivity
 import com.example.diftrash.ui.scan.ScanActivity
 
+
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-//    private var firebaseAuth = FirebaseAuth.getInstance()
 
 
     override fun onCreateView(

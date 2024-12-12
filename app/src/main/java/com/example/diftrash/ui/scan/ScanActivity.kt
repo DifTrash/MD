@@ -28,6 +28,8 @@ import com.example.diftrash.retrofit.ApiConfig
 import com.example.diftrash.retrofit.getImageUri
 import com.example.diftrash.retrofit.uriToFile
 import com.example.diftrash.ui.MainActivity
+import com.example.diftrash.ui.scan.ResultActivity
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -203,7 +205,7 @@ class ScanActivity : AppCompatActivity() {
 
             val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
             val multipartBody = MultipartBody.Part.createFormData(
-                "image",
+                "file", // Nama field sesuai API
                 imageFile.name,
                 requestImageFile
             )
@@ -213,37 +215,50 @@ class ScanActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 try {
                     val apiService = ApiConfig.getApiService()
-                    val successResponse = apiService.uploadImage(multipartBody)
+                    val uid = getUidFromFirebase()
+                    val response = apiService.uploadImage(uid, multipartBody)
 
-                    Log.d("imgresponse", "${successResponse.confidence}")
-                    val convidence: Double = successResponse.confidence as Double
-                    val presentage: Double = convidence * 100
-                    (presentage.toString())
+                    val confidence = response.data?.data?.confidence as? Double ?: 0.0
+                    val type = response.data?.data?.type ?: "Unknown"
+                    val message = response.data?.message ?: "No message"
 
-                    Log.d("imgresponse", "${successResponse.diagnosis}")
-                    val diagnosis = successResponse.diagnosis
-                    (diagnosis.toString())
+                    Log.d("Prediction Response", "Type: $type, Confidence: $confidence, Message: $message")
 
                     showLoading(false)
 
                     val intent = Intent(this@ScanActivity, ResultActivity::class.java)
                     intent.putExtra("imageUri", currentImageUri.toString())
-                    intent.putExtra("confidence", successResponse.confidence)
-                    intent.putExtra("diagnosis", successResponse.diagnosis)
-
+                    intent.putExtra("type", type)
+                    intent.putExtra("confidence", confidence)
+                    intent.putExtra("message", message)
                     startActivity(intent)
 
                 } catch (e: HttpException) {
-                    val errorBody = JSONObject(e.response()?.errorBody()?.string()!!)
-                    Log.d("imgresponse error", "${errorBody}")
-                    showToast(errorBody.getString("message"))
+                    val errorBody = e.response()?.errorBody()?.string()
+                    val errorMessage = if (!errorBody.isNullOrEmpty()) {
+                        JSONObject(errorBody).getString("message")
+                    } else {
+                        getString(R.string.upload_failed)
+                    }
+                    Log.e("Upload Error", errorMessage)
+                    showToast(errorMessage)
+                    showLoading(false)
+                } catch (e: Exception) {
+                    Log.e("Unexpected Error", e.localizedMessage ?: "Unknown error")
+                    showToast(getString(R.string.unexpected_error))
                     showLoading(false)
                 }
             }
-
-
+        } ?: run {
+            showToast(getString(R.string.no_image_selected))
         }
     }
+
+    private fun getUidFromFirebase(): String {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        return currentUser?.uid ?: "UnknownUID"
+    }
+
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
